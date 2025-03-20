@@ -32,7 +32,9 @@ RUN apt update -y && apt install -y \
 	git \
 	cmake \
 	libglib2.0-dev \
-	libslirp-dev
+	libslirp-dev \
+	# Non RISCV-Tool-Chain Dependencies below
+	vim \
 
 RUN mkdir -p /opt/riscv
 
@@ -41,8 +43,6 @@ ENV PATH="$PATH:/opt/riscv/bin"
 RUN cd riscv-gnu-toolchain && \
 		./configure --prefix=/opt/riscv && \
 		make
-
-RUN apt install -y vim
 
 RUN echo "echo 'Welcome! RISC-V tools are available at /opt/riscv/bin:'" >> ~/.bashrc
 RUN echo "ls /opt/riscv/bin" >> ~/.bashrc
